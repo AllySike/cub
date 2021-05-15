@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 20:47:00 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 12:36:22 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/14 15:28:46 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ void	line_parser(char *line, t_scene *scene, int fd)
 		if ((line[0] == 'S' || line[0] == 'F' || line[0] == 'C'
 				|| line[0] == 'R') && line[1] == ' ')
 			handle_res_tex_col(line, scene, fd);
-		// else if (line[2] && line[2] == ' '
-		// 	&& ((line[0] == 'N' && line[1] == 'O')
-		// 		|| (line[0] == 'S' && line[1] == 'O')
-		// 		|| (line[0] == 'W' && line[1] == 'E')
-		// 		|| (line[0] == 'E' && line[1] == 'A')))
-		// 	handle_texture(line, scene, fd);
-		// else if (line[0] == ' ' || line[0] == '1')
-		// 	handle_map(&(*line), scene, fd);
+		else if (line[2] && line[2] == ' '
+			&& ((line[0] == 'N' && line[1] == 'O')
+				|| (line[0] == 'S' && line[1] == 'O')
+				|| (line[0] == 'W' && line[1] == 'E')
+				|| (line[0] == 'E' && line[1] == 'A')))
+			handle_texture(line, scene, fd);
+		else if (line[0] == ' ' || line[0] == '1')
+			handle_map(&(*line), scene, fd);
 		// else
 		// {
 		// 	close(fd);

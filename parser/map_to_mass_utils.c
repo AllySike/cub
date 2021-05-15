@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 20:55:06 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/13 21:03:40 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 14:39:41 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,21 @@ void	handle_map(char *line, t_scene *scene, int fd)
 	int	rd;
 
 	scene->map = ft_mapnew(line);
-	rd = get_next_line(fd, &line);
-	while (rd >= 0 && *line && *line != '\n')
-	{
-		ft_mapadd_back(&(scene->map), ft_mapnew(line));
-		free(line);
-		rd = get_next_line(fd, &line);
-	}
-	while (rd)
-	{
-		if (line && *line && *line != '\n')
-			map_error(fd, scene, line);
-		free(line);
-		rd = get_next_line(fd, &line);
-	}
-	if (line && *line && *line != '\n')
-		map_error(fd, scene, line);
-	free(line);
+	 rd = get_next_line(fd, &line);
+	 while (rd >= 0 && *line && *line != '\n')
+	 {
+	 	ft_mapadd_back(&(scene->map), ft_mapnew(line));
+	 	free(line);
+	 	rd = get_next_line(fd, &line);
+	 }
+	 while (rd)
+	 {
+	 	if (line && *line && *line != '\n')
+	 		map_error(fd, scene, line);
+	 	free(line);
+	 	rd = get_next_line(fd, &line);
+	 }
+	 if (line && *line && *line != '\n')
+	 	map_error(fd, scene, line);
+	 free(line);
 }

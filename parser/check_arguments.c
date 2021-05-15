@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 18:26:43 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 12:24:04 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/14 15:27:49 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_check_argv(int argc, char **argv, t_scene **scene, int *fd)
 {
 	if (argc < 2 || argc > 3)
 	{
-		write(STDERR_FILENO, "Error\nWrong number of arguments\n", 33);
+		write(STDERR_FILENO, "Error\nWrong number of arguments\n", 32);
 		exit(-1);
 	}
 	check_errors_with_extentions(argv);
@@ -63,6 +63,11 @@ void	ft_check_argv(int argc, char **argv, t_scene **scene, int *fd)
 		exit(-1);
 	}
 	init_scene(scene);
+	if (!*scene)
+	{
+		write(STDERR_FILENO, "Error\nMalloc for scene failed\n", 31);
+		exit(-1);
+	}
 	if (argc == 3)
 		ft_check_save(*scene, argv[2], fd);
 }

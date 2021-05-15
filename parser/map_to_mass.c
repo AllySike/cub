@@ -46,17 +46,30 @@ static void set_player(int x, int y, char c, t_scene *scene)
 	scene->player.y = y * SIZE_CHUNK;
 }
 
-static void	ft_check_walls(int i, int j, t_scene *scene)
+static void	ft_check_walls(t_scene *scene)
 {
-	if ((scene->mass[i - 1][j] != '1' && scene->mass[i - 1][j] != ' ')
-			&& (scene->mass[i - 1][j - 1] != '1' && scene->mass[i - 1][j - 1] != ' ')
-			&& (scene->mass[i][j - 1] != '1' && scene->mass[i][j - 1] != ' ')
-			&& (scene->mass[i + 1][j - 1] != '1' && scene->mass[i + 1][j - 1] != ' ')
-			&& (scene->mass[i + 1][j] != '1' && scene->mass[i + 1][j] != ' ')
-			&& (scene->mass[i + 1][j + 1] != '1' && scene->mass[i + 1][j + 1] != ' ')
-			&& (scene->mass[i][j + 1] != '1' && scene->mass[i][j + 1] != ' ')
-			&& (scene->mass[i - 1][j + 1] != '1' && scene->mass[i - 1][j + 1] != ' '))
-			error_with_map(scene);
+    int i;
+    int j;
+
+    i = 0;
+    while (i <= scene->mass_y)
+    {
+        j = 0;
+        while(scene->mass[i][j])
+        {
+            if (scene->mass[i][j] == ' ')
+            {
+                if ((j > 0 && scene->mass[i][j - 1] && scene->mass[i][j - 1] != ' ' && scene->mass[i][j - 1] != '1')
+                    || (scene->mass[i][j + 1] && scene->mass[i][j + 1] != ' ' && scene->mass[i][j + 1] != '1')
+                    || (i + 1 < scene->mass_y && scene->mass[i + 1][j] && scene->mass[i + 1][j] != ' '
+                    && scene->mass[i + 1][j] != '1') || (i > 0 && scene->mass[i - 1] && scene->mass[i - 1][j]
+                    && scene->mass[i - 1][j] != ' ' && scene->mass[i - 1][j] != '1'))
+                    error_with_map(scene);
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 void	mass_from_map(t_scene *scene, t_map   *map, int ii)
@@ -69,10 +82,8 @@ void	mass_from_map(t_scene *scene, t_map   *map, int ii)
 	while (map->line[i])
 	{
 		c = map->line[i];
-		if (c == '0' || c == '1')
+		if (c == '0' || c == '1' || c == ' ')
 			scene->mass[ii][i] = c;
-		if (c == ' ')
-			ft_check_walls(ii, i, scene);
 		else if (c == '2')
 			scene->mass[ii][i] = c;
 		else if ((c == 'N' || c == 'S' || c == 'W' || c == 'E') && scene->player.x < 0)
@@ -101,8 +112,8 @@ void	map_to_mass(t_scene *scene)
 	tmp = scene->map;
 	j = ft_mapsize(scene->map);
 	scene->mass = (char **)malloc(sizeof(char*) * (j + 1));
-	scene->mass_y = j;
-	scene->mass_x = max;
+	scene->mass_y = j - 1;
+	scene->mass_x = max - 1;
 	i = 0;
 	while (i < j)
 	{
@@ -111,5 +122,6 @@ void	map_to_mass(t_scene *scene)
 		tmp = tmp->next;
 		i++;
 	}
+    ft_check_walls(scene);
 	scene->mass[i] = NULL;
 }

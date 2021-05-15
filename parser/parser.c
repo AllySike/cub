@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:45 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 12:24:52 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/14 15:29:21 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	init_scene(t_scene **scene)
 	(*scene)->player.y = -1;
 	(*scene)->player.angle = -1;
 	(*scene)->mass_x = -1;
-	(*scene)->mass_y = -1;
+    (*scene)->mass_y = -1;
+    (*scene)->save_option = 0;
 }
 
 void	ft_parser(int fd, t_scene *scene)

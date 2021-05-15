@@ -6,7 +6,7 @@
 #    By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/05/14 12:36:56 by kgale            ###   ########.fr        #
+#    Updated: 2021/05/14 14:24:35 by kgale            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ OBJS =	$(OBJS_SRCS)
 all: $(NAME)
 
 $(NAME) : $(OBJS_SRCS)
+		@$(MAKE) -C mlx_mac
+		@$(MAKE) -C libft
 		@$(CC) $(FLAGS) $(OPTION) $(SRCS)
 		@$(LIBFT)
 		@$(CC) $(LIB) $(OPTION_LIB) $(OBJS_SRCS) -o $(NAME)

@@ -28,7 +28,7 @@ static void	wall_for_screen(t_all *all, t_maping_texture *texture)
 			(int)get_color_image(&all->NO_texture,
 				(int)all->NO_texture.color_x, (int)all->NO_texture.color_y));
 	if ((texture->y_mass == (int)round(texture->y))
-		&& (all->scene->mass[(texture->y_mass / SIZE_CHUNK) - 1]
+		&& (all->scene->mass[(texture->y_mass / SIZE_CHUNK - 1)]
 			[texture->x_mass / SIZE_CHUNK] != '1'))
 		my_mlx_pixel_put(&all->data, all->visual.width, texture->y_tmp,
 			(int)get_color_image(&all->SO_texture,
@@ -119,8 +119,12 @@ void	draw(t_all *all, double x, double y, double l)
 	if (h > all->scene->y_resolution)
 		h = all->scene->y_resolution;
 	texture.y_tmp = (all->scene->y_resolution / 2) + (h / 2) - 1;
-	texture.x_mass = (int)(round(x) / SIZE_CHUNK) *SIZE_CHUNK;
-	texture.y_mass = (int)(round(y) / SIZE_CHUNK) *SIZE_CHUNK;
+	texture.x_mass = (int)(round(x) / SIZE_CHUNK) * SIZE_CHUNK;
+	texture.y_mass = (int)(round(y) / SIZE_CHUNK) * SIZE_CHUNK;
+	if (x < 0)
+		x = SIZE_CHUNK;
+	if (y < 0)
+		y = SIZE_CHUNK;
 	texture.x = x;
 	texture.y = y;
 	pull_texture(all, &texture, h, h_real);

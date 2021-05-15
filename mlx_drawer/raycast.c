@@ -12,7 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-
 static void	ft_abscissa(t_all *all, t_reycast *abscissa, double sin_a)
 {
 	double	tmp;
