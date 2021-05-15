@@ -6,7 +6,7 @@
 #    By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/05/14 14:24:35 by kgale            ###   ########.fr        #
+#    Updated: 2021/05/15 20:49:24 by kgale            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ clean:
 		@$(LIBFT) clean
 fclean: clean
 		rm -f $(NAME)
+		rm -f *.o
 		rm -f *.bmp
 		@$(LIBFT) fclean
 re: fclean all

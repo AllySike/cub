@@ -54,12 +54,12 @@ void	save_sprite_list(t_all *all)
 
 static void	consist_map(t_all *all)
 {
-    while (all->scene->mass[++all->map_length.y] != NULL)
-    {
-        all->map_length.x = -1;
-        while (all->scene->mass[all->map_length.y][++all->map_length.x] != '\0')
-            save_sprite_list(all);
-    }
+	while (all->scene->mass[++all->map_length.y] != NULL)
+	{
+		all->map_length.x = -1;
+		while (all->scene->mass[all->map_length.y][++all->map_length.x] != '\0')
+			save_sprite_list(all);
+	}
 }
 
 int	render_next_frame(t_all *all)

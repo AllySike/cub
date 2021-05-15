@@ -42,8 +42,27 @@ static void set_player(int x, int y, char c, t_scene *scene)
 		scene->player.angle = 270;
 	else if (c != 'E')
 		scene->player.angle = 90;
+	scene->mass[y][x] = '0';
 	scene->player.x = x * SIZE_CHUNK;
 	scene->player.y = y * SIZE_CHUNK;
+}
+
+static int ft_check_diagonal_walls(t_scene *scene, int i, int j)
+{
+	if ((j > 0 && !(scene->mass[i][j - 1] == '0' || scene->mass[i][j - 1] == '1'
+		|| scene->mass[i][j - 1] == '2')) || (j > 0 && i > 0 && !(scene->mass[i - 1][j - 1] == '0'
+		|| scene->mass[i - 1][j - 1] == '1' || scene->mass[i - 1][j - 1] == '2')) || (j > 0
+		&& i < scene->mass_y && !(scene->mass[i + 1][j - 1] == '0' || scene->mass[i + 1][j - 1] == '1'
+		|| scene->mass[i + 1][j - 1] == '2')) || (j < scene->mass_x && !(scene->mass[i][j + 1] == '0'
+		|| scene->mass[i][j + 1] == '1' || scene->mass[i][j + 1] == '2'))
+		|| (j < scene->mass_x && i > 0 && !(scene->mass[i - 1][j + 1] == '0' || scene->mass[i - 1][j + 1] == '1'
+		|| scene->mass[i - 1][j + 1] == '2')) || (j < scene->mass_x && i < scene->mass_y
+		&& !(scene->mass[i + 1][j + 1] == '0' || scene->mass[i + 1][j + 1] == '1' || scene->mass[i + 1][j + 1] == '2'))
+		|| (i > 0 && !(scene->mass[i - 1][j] == '0' || scene->mass[i - 1][j] == '1' || scene->mass[i - 1][j] == '2'))
+		|| (i < scene->mass_y && !(scene->mass[i][j + 1] == '0' || scene->mass[i][j + 1] == '1'
+		|| scene->mass[i][j + 1] == '2')))
+		return (0);
+	return (1);
 }
 
 static void	ft_check_walls(t_scene *scene)
@@ -55,15 +74,11 @@ static void	ft_check_walls(t_scene *scene)
     while (i <= scene->mass_y)
     {
         j = 0;
-        while(scene->mass[i][j])
+        while(j <= scene->mass_x)
         {
-            if (scene->mass[i][j] == ' ')
+            if (scene->mass[i][j] == '0' || scene->mass[i][j] == '2')
             {
-                if ((j > 0 && scene->mass[i][j - 1] && scene->mass[i][j - 1] != ' ' && scene->mass[i][j - 1] != '1')
-                    || (scene->mass[i][j + 1] && scene->mass[i][j + 1] != ' ' && scene->mass[i][j + 1] != '1')
-                    || (i + 1 < scene->mass_y && scene->mass[i + 1][j] && scene->mass[i + 1][j] != ' '
-                    && scene->mass[i + 1][j] != '1') || (i > 0 && scene->mass[i - 1] && scene->mass[i - 1][j]
-                    && scene->mass[i - 1][j] != ' ' && scene->mass[i - 1][j] != '1'))
+                if ((!ft_check_diagonal_walls(scene, i, j)))
                     error_with_map(scene);
             }
             j++;
