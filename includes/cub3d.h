@@ -52,7 +52,7 @@ typedef struct s_key
 	int			run;
 }				t_key;
 
-typedef struct s_reycast
+typedef struct s_raycast
 {
 	int			width;
 	double		dist_screen;
@@ -63,10 +63,10 @@ typedef struct s_reycast
 	double		dist_x;
 	double		dist_y;
 	double		l;
-	double		*rey_len;
+	double		*ray_len;
 	int			check_sprite;
 	int			count_sprite;
-}				t_reycast;
+}				t_raycast;
 
 typedef struct s_sprite
 {
@@ -143,7 +143,7 @@ typedef struct s_all
 	t_key				key;
 	t_length			map_length;
 	t_length			pix_for_map;
-	t_reycast			vis;
+	t_raycast			vis;
 	t_texture			NO_texture;
 	t_texture			SO_texture;
 	t_texture			WE_texture;
@@ -170,7 +170,7 @@ unsigned int	get_color_image(t_texture *texture, int x, int y);
 int				ft_close_exit(t_all *all);
 void			free_sprite(t_all *all);
 void			print_error(t_all *all);
-void			ft_reycast(t_all *all);
+void			ft_raycast(t_all *all);
 void			move(t_all *all);
 void			draw(t_all *all, double x, double y, double l);
 void			draw_sprite(t_all *all);

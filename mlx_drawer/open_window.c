@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 22:52:26 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:54:54 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:54:11 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	render_next_frame(t_all *all)
 {
-	ft_reycast(all);
+	ft_raycast(all);
 	if (all->scene->save_option == 1)
 	{
 		create_bmp(all);
@@ -39,10 +39,7 @@ static int	ft_key_hook(int keycode, t_all *all)
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(all->vars.mlx, all->vars.win);
-		free(all->vis.rey_len);
-		if (all->sprite != NULL)
-			free_sprite(all);
-		exit(-1);
+		ft_close_exit(all);
 	}
 	if (keycode == W || keycode == S || keycode == A
 		|| keycode == D || keycode == TURN_LEFT
@@ -83,8 +80,6 @@ int	ft_window(t_scene *scene)
 	}
 	check_scene(scene);
 	all.scene = scene;
-	if (all_null(&all) == -1)
-		return (-1);
 	if (all_null(&all) == -1)
 		return (-1);
 	consist_map(&all);

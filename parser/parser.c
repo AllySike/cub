@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:45 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:57:50 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:40:26 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	init_scene(t_scene **scene)
 {
 	*scene = (t_scene *)malloc(sizeof(t_scene));
+	if (!*scene)
+	{
+		printf("Error:\nMalloc for scene failed");
+		exit(-1);
+	}
 	(*scene)->x_rea = -1;
 	(*scene)->y_rea = -1;
 	(*scene)->NO_texture = NULL;

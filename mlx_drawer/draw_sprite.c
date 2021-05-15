@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:15:24 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:56:19 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:48:32 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_texture_sprite(t_all *all)
 		i++;
 		if (all->sprite->start + i < 0
 			|| all->sprite->start + i >= all->scene->x_rea
-			|| all->vis.rey_len[all->sprite->start + i] < all->sprite->dist)
+			|| all->vis.ray_len[all->sprite->start + i] < all->sprite->dist)
 			continue ;
 		j = -1;
 		while (j < all->sprite->size - 1)
@@ -65,7 +65,11 @@ void	save_sprite_list(t_all *all)
 			all->sprite = all->sprite->next;
 		all->sprite = (t_sprite *)malloc(sizeof(t_sprite));
 		if (all->sprite == NULL)
+		{
+			printf("Error:\nMalloc for sprites failed");
+			free_scene(all->scene);
 			exit(-1);
+		}
 		all->sprite->x = all->map_length.x * SIZE_CHUNK + (SIZE_CHUNK / 2.0);
 		all->sprite->y = all->map_length.y * SIZE_CHUNK + (SIZE_CHUNK / 2.0);
 		all->sprite->next = new;

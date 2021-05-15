@@ -6,13 +6,13 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:27:37 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:48:32 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void	ft_abscissa(t_all *all, t_reycast *abscissa, double sin_a)
+static void	ft_abscissa(t_all *all, t_raycast *abscissa, double sin_a)
 {
 	double	tmp;
 
@@ -40,7 +40,7 @@ static void	ft_abscissa(t_all *all, t_reycast *abscissa, double sin_a)
 	}
 }
 
-static void	ft_ordinate(t_all *all, t_reycast *ordinate, double cos_a)
+static void	ft_ordinate(t_all *all, t_raycast *ordinate, double cos_a)
 {
 	double	tmp;
 
@@ -67,7 +67,7 @@ static void	ft_ordinate(t_all *all, t_reycast *ordinate, double cos_a)
 	}
 }
 
-static void	reycast_utils(t_all *all, t_reycast *abscissa, t_reycast *ordinate)
+static void	raycast_utils(t_all *all, t_raycast *abscissa, t_raycast *ordinate)
 {
 	double		cos_a;
 	double		sin_a;
@@ -94,11 +94,11 @@ static void	reycast_utils(t_all *all, t_reycast *abscissa, t_reycast *ordinate)
 	ft_abscissa(all, abscissa, sin_a);
 }
 
-void	ft_reycast(t_all *all)
+void	ft_raycast(t_all *all)
 {
 	double		step;
-	t_reycast	abscissa;
-	t_reycast	ordinate;
+	t_raycast	abscissa;
+	t_raycast	ordinate;
 
 	all->vis.ugl = (all->scene->pl.angl - (int)FOV2) * (RADS);
 	all->vis.dist_screen = (all->scene->x_rea / 2.0)
@@ -107,7 +107,7 @@ void	ft_reycast(t_all *all)
 	step = (FOV * (RADS)) / (all->scene->x_rea - 1);
 	while (all->vis.ugl <= ((all->scene->pl.angl + (int)(FOV / 2)) * RADS))
 	{
-		reycast_utils(all, &abscissa, &ordinate);
+		raycast_utils(all, &abscissa, &ordinate);
 		abscissa.l = sqrt(pow((all->scene->pl.x - abscissa.hypotenuse), 2)
 				+ pow((all->scene->pl.y - abscissa.dist_y), 2));
 		ordinate.l = sqrt(pow((all->scene->pl.x - ordinate.dist_x), 2)

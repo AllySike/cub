@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:23:50 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:23:31 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:48:32 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	ft_close_exit(t_all *all)
 {
-	free(all->vis.rey_len);
+	if (all->vis.ray_len)
+		free(all->vis.ray_len);
 	if (all->sprite != NULL)
 		free_sprite(all);
-	free_scene(all->scene);
+	if (all->scene)
+		free_scene(all->scene);
 	exit(0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:55:49 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:48:32 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	draw(t_all *all, double x, double y, double l)
 	int					h;
 	int					h_real;
 
-	all->vis.rey_len[all->vis.width] = l;
+	all->vis.ray_len[all->vis.width] = l;
 	l *= cos(fabs(all->vis.ugl - (all->scene->pl.angl * (RADS))));
 	h = (int)round((SIZE_CHUNK / l) * all->vis.dist_screen);
 	h_real = h;

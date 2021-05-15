@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:29:02 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:53:44 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	all_addr(t_all *all)
 			&all->S_texture.endian);
 }
 
-static int	all_window(t_all *all)
+static void	all_window(t_all *all)
 {
 	if (all->scene->save_option != 1)
 		all->vars.win = mlx_new_window(all->vars.mlx,
@@ -41,11 +41,14 @@ static int	all_window(t_all *all)
 	all->data.addr = mlx_get_data_addr(all->data.img,
 			&all->data.bits_per_pixel,
 			&all->data.line_length, &all->data.endian);
-	all->vis.rey_len = (double *)malloc(sizeof(double)
+	all->vis.ray_len = (double *)malloc(sizeof(double)
 			* all->scene->x_rea);
-	if (all->vis.rey_len == NULL)
-		return (-1);
-	return (0);
+	if (all->vis.ray_len == NULL)
+	{
+		printf("Error:\nMalloc failed");
+		free_scene(all->scene);
+		exit(-1);
+	}
 }
 
 static void	all_image(t_all *all)
@@ -76,8 +79,7 @@ int	all_null(t_all *all)
 	all->map_length.y = -1;
 	all->pix_for_map.x = 0;
 	all->pix_for_map.y = 0;
-	if (all_window(all) == -1)
-		return (-1);
+	all_window(all);
 	all_image(all);
 	if (all->WE_texture.img == NULL || all->EA_texture.img == NULL
 		|| all->NO_texture.img == NULL || all->SO_texture.img == NULL

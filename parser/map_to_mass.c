@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 20:48:51 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/15 22:49:28 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 23:39:40 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	mass_from_map(t_scene *scene, t_map *map, int ii)
 static void	mass_init(t_scene *scene, int j, int max)
 {
 	scene->mass = (char **)malloc(sizeof(char *) * (j + 1));
+	if (!scene->mass)
+	{
+		printf("Error:Malloc for map failed\n");
+		free_scene(scene);
+		exit (-1);
+	}
 	scene->mass_y = j - 1;
 	scene->mass_x = max - 1;
 }
