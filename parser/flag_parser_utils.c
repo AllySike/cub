@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 21:04:23 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/13 21:04:56 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:32:19 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_check_path_to_texture(char *path, char **split, char *line)
 		ft_exit(fd, split, line);
 	fd = read(fd, buff, 0);
 	if (fd < 0)
-		ft_exit(fd, split ,line);
+		ft_exit(fd, split, line);
 	close(fd);
-	return (1) ;
+	return (1);
 }

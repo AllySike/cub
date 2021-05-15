@@ -6,37 +6,37 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:55:49 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 10:57:41 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void	wall_for_screen(t_all *all, t_maping_texture *texture)
+static void	wall_for_screen(t_all *all, t_map_texture *texture)
 {
 	if ((texture->x_mass + SIZE_CHUNK - SIZE_PLAYER
 			<= (int)round(texture->x))
 		&& (all->scene->mass[texture->y_mass / SIZE_CHUNK]
 			[(texture->x_mass / SIZE_CHUNK) + 1] != '1'))
-		my_mlx_pixel_put(&all->data, all->visual.width, texture->y_tmp,
+		my_mlx_pixel_put(&all->data, all->vis.width, texture->y_tmp,
 			(int)get_color_image(&all->WE_texture,
 				(int)all->WE_texture.color_x, (int)all->WE_texture.color_y));
 	if (texture->y_mass + SIZE_CHUNK - SIZE_PLAYER == (int)round(texture->y)
 		&& (all->scene->mass[(texture->y_mass / SIZE_CHUNK) + 1]
 			[texture->x_mass / SIZE_CHUNK] != '1'))
-		my_mlx_pixel_put(&all->data, all->visual.width, texture->y_tmp,
+		my_mlx_pixel_put(&all->data, all->vis.width, texture->y_tmp,
 			(int)get_color_image(&all->NO_texture,
 				(int)all->NO_texture.color_x, (int)all->NO_texture.color_y));
 	if ((texture->y_mass == (int)round(texture->y))
 		&& (all->scene->mass[(texture->y_mass / SIZE_CHUNK - 1)]
 			[texture->x_mass / SIZE_CHUNK] != '1'))
-		my_mlx_pixel_put(&all->data, all->visual.width, texture->y_tmp,
+		my_mlx_pixel_put(&all->data, all->vis.width, texture->y_tmp,
 			(int)get_color_image(&all->SO_texture,
 				(int)all->SO_texture.color_x, (int)all->SO_texture.color_y));
 	if ((texture->x_mass == (int)round(texture->x))
 		&& (all->scene->mass[texture->y_mass / SIZE_CHUNK]
 			[(texture->x_mass / SIZE_CHUNK) - 1] != '1'))
-		my_mlx_pixel_put(&all->data, all->visual.width, texture->y_tmp,
+		my_mlx_pixel_put(&all->data, all->vis.width, texture->y_tmp,
 			(int)get_color_image(&all->EA_texture,
 				(int)all->EA_texture.color_x, (int)all->EA_texture.color_y));
 }
@@ -46,13 +46,13 @@ static void	draw_flag(t_all *all)
 	int	i;
 
 	i = 0;
-	while (i < all->scene->y_resolution / 2)
-		my_mlx_pixel_put(&all->data, all->visual.width, i++, all->scene->ceiling);
-	while (i < all->scene->y_resolution)
-		my_mlx_pixel_put(&all->data, all->visual.width, i++, all->scene->floor);
+	while (i < all->scene->y_rea / 2)
+		my_mlx_pixel_put(&all->data, all->vis.width, i++, all->scene->ceiling);
+	while (i < all->scene->y_rea)
+		my_mlx_pixel_put(&all->data, all->vis.width, i++, all->scene->floor);
 }
 
-static void	pull_texture_utils(t_all *all, t_maping_texture *texture)
+static void	pull_texture_utils(t_all *all, t_map_texture *texture)
 {
 	if (SIZE_CHUNK > all->NO_texture.width)
 		all->NO_texture.color_x = (int)(((int)texture->x % SIZE_CHUNK)
@@ -80,7 +80,7 @@ static void	pull_texture_utils(t_all *all, t_maping_texture *texture)
 				* (all->WE_texture.width / SIZE_CHUNK));
 }
 
-static void	pull_texture(t_all *all, t_maping_texture *texture, int h, int h_real)
+static void	pull_texture(t_all *all, t_map_texture *texture, int h, int h_real)
 {
 	int	i;
 	int	k;
@@ -88,7 +88,7 @@ static void	pull_texture(t_all *all, t_maping_texture *texture, int h, int h_rea
 	i = 0;
 	pull_texture_utils(all, texture);
 	draw_flag(all);
-	while (texture->y_tmp >= (all->scene->y_resolution / 2) - (h / 2)
+	while (texture->y_tmp >= (all->scene->y_rea / 2) - (h / 2)
 		&& texture->y_tmp >= 0)
 	{
 		k = ((h + h_real) >> 1) - i;
@@ -108,19 +108,19 @@ static void	pull_texture(t_all *all, t_maping_texture *texture, int h, int h_rea
 
 void	draw(t_all *all, double x, double y, double l)
 {
-	t_maping_texture	texture;
+	t_map_texture		texture;
 	int					h;
 	int					h_real;
 
-	all->visual.rey_len[all->visual.width] = l;
-	l *= cos(fabs(all->visual.ugl - (all->scene->player.angle * (PI / 180))));
-	h = (int)round((SIZE_CHUNK / l) * all->visual.dist_screen);
+	all->vis.rey_len[all->vis.width] = l;
+	l *= cos(fabs(all->vis.ugl - (all->scene->pl.angl * (RADS))));
+	h = (int)round((SIZE_CHUNK / l) * all->vis.dist_screen);
 	h_real = h;
-	if (h > all->scene->y_resolution)
-		h = all->scene->y_resolution;
-	texture.y_tmp = (all->scene->y_resolution / 2) + (h / 2) - 1;
-	texture.x_mass = (int)(round(x) / SIZE_CHUNK) * SIZE_CHUNK;
-	texture.y_mass = (int)(round(y) / SIZE_CHUNK) * SIZE_CHUNK;
+	if (h > all->scene->y_rea)
+		h = all->scene->y_rea;
+	texture.y_tmp = (all->scene->y_rea / 2) + (h / 2) - 1;
+	texture.x_mass = (int)(round(x) / SIZE_CHUNK) *SIZE_CHUNK;
+	texture.y_mass = (int)(round(y) / SIZE_CHUNK) *SIZE_CHUNK;
 	if (x < 0)
 		x = SIZE_CHUNK;
 	if (y < 0)

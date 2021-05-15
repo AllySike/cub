@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:28:52 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 10:20:19 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:27:07 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ unsigned int	get_color_image(t_texture *texture, int x, int y)
 			+ x * (texture->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }
-

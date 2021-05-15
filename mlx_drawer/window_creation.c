@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:29:02 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 11:29:24 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ static int	all_window(t_all *all)
 {
 	if (all->scene->save_option != 1)
 		all->vars.win = mlx_new_window(all->vars.mlx,
-				all->scene->x_resolution, all->scene->y_resolution, "cub3D");
-	all->data.img = mlx_new_image(all->vars.mlx, all->scene->x_resolution,
-			all->scene->y_resolution);
+				all->scene->x_rea, all->scene->y_rea, "cub3D");
+	all->data.img = mlx_new_image(all->vars.mlx, all->scene->x_rea,
+			all->scene->y_rea);
 	all->data.addr = mlx_get_data_addr(all->data.img,
 			&all->data.bits_per_pixel,
 			&all->data.line_length, &all->data.endian);
-	all->visual.rey_len = (double *)malloc(sizeof(double) * all->scene->x_resolution);
-	if (all->visual.rey_len == NULL)
+	all->vis.rey_len = (double *)malloc(sizeof(double)
+			* all->scene->x_rea);
+	if (all->vis.rey_len == NULL)
 		return (-1);
 	return (0);
 }
@@ -69,8 +70,8 @@ static void	all_image(t_all *all)
 int	all_null(t_all *all)
 {
 	all->sprite = NULL;
-	all->visual.check_sprite = 0;
-	all->visual.count_sprite = 0;
+	all->vis.check_sprite = 0;
+	all->vis.count_sprite = 0;
 	all->map_length.x = -1;
 	all->map_length.y = -1;
 	all->pix_for_map.x = 0;

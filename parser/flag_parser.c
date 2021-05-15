@@ -6,7 +6,7 @@
 /*   By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 20:47:00 by kgale             #+#    #+#             */
-/*   Updated: 2021/05/14 15:28:46 by kgale            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:29:34 by kgale            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ static void	handle_res_tex_col(char *line, t_scene *scene, int fd)
 	if (line[0] == 'R')
 	{
 		split = ft_split(line, ' ');
-		if (!split[0] || !split[1] || !split[2] || scene->x_resolution >= 0
+		if (!split[0] || !split[1] || !split[2] || scene->x_rea >= 0
 			|| !ft_aredigits(split[1]) || !ft_aredigits(split[2]) || split[3])
 			ft_exit(fd, split, line);
-		scene->x_resolution = ft_atoi(split[1]);
-		scene->y_resolution = ft_atoi(split[2]);
+		scene->x_rea = ft_atoi(split[1]);
+		scene->y_rea = ft_atoi(split[2]);
 		free_split(split);
 	}
 	else if (line[0] == 'S')
@@ -123,13 +123,13 @@ void	line_parser(char *line, t_scene *scene, int fd)
 			handle_texture(line, scene, fd);
 		else if (line[0] == ' ' || line[0] == '1')
 			handle_map(&(*line), scene, fd);
-		// else
-		// {
-		// 	close(fd);
-		// 	free(line);
-		// 	free_scene(scene);
-		// 	write(STDERR_FILENO, "Error\nInvalid map\n", 18);
-		// 	exit(-1);
-		// }
+		else
+		{
+			close(fd);
+			free(line);
+			free_scene(scene);
+			write(STDERR_FILENO, "Error\nInvalid map\n", 18);
+			exit(-1);
+		}
 	}
 }

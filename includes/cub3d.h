@@ -21,6 +21,7 @@
 # define TURN_RIGHT 124
 # define FOV2 30
 # define PI 3.14
+# define RADS 0.01745
 # define SIZE_PLAYER 1
 
 typedef struct s_vars
@@ -85,13 +86,13 @@ typedef struct s_maping_texture
 	int				y_tmp;
 	double			x;
 	double			y;
-}					t_maping_texture;
+}					t_map_texture;
 
 typedef struct s_player
 {
 	double		x;
 	double		y;
-	double		angle;
+	double		angl;
 }				t_player;
 
 typedef struct s_length
@@ -104,8 +105,8 @@ typedef struct s_length
 
 typedef struct s_scene
 {
-	int			x_resolution;
-	int			y_resolution;
+	int			x_rea;
+	int			y_rea;
 	char		*NO_texture;
 	char		*SO_texture;
 	char		*WE_texture;
@@ -118,7 +119,7 @@ typedef struct s_scene
 	int			mass_y;
 	int			save_option;
 	t_map		*map;
-	t_player	player;
+	t_player	pl;
 }				t_scene;
 
 typedef struct s_texture
@@ -142,7 +143,7 @@ typedef struct s_all
 	t_key				key;
 	t_length			map_length;
 	t_length			pix_for_map;
-	t_reycast			visual;
+	t_reycast			vis;
 	t_texture			NO_texture;
 	t_texture			SO_texture;
 	t_texture			WE_texture;
@@ -178,5 +179,10 @@ void			create_bmp(t_all *all);
 void			check_sprite(t_all *all, double step);
 unsigned int	get_color(t_data *data, int x, int y);
 void			init_scene(t_scene **scene);
+void			move_utils(t_all *all, int i);
+void			ft_check_walls(t_scene *scene);
+int				ft_window(t_scene *scene);
+void			save_sprite_list(t_all *all);
+void			check_scene(t_scene *scene);
 
 #endif

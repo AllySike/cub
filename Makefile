@@ -6,13 +6,13 @@
 #    By: kgale <kgale@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/05/15 20:49:24 by kgale            ###   ########.fr        #
+#    Updated: 2021/05/15 22:55:35 by kgale            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = gcc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 LIB = -L mlx_mac  -L libft
 OPTION_LIB = -lmlx -framework OpenGL -framework AppKit -lft
 OPTION = -c
@@ -25,6 +25,7 @@ SRCS =	main.c\
 		parser/map_to_mass_utils.c\
 		parser/map_to_mass.c\
 		parser/parser.c\
+		parser/wall_check.c\
 		mlx_drawer/bmp.c\
 		mlx_drawer/draw_sprite.c\
 		mlx_drawer/draw_walls.c\
@@ -32,6 +33,7 @@ SRCS =	main.c\
 		mlx_drawer/mlx_utils.c\
 		mlx_drawer/move_player_utils.c\
 		mlx_drawer/move_player.c\
+		mlx_drawer/open_window.c\
 		mlx_drawer/raycast.c\
 		mlx_drawer/sprite_utils.c\
 		mlx_drawer/window_creation.c
