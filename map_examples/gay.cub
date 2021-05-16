@@ -1,18 +1,18 @@
 R 1924 1080
 
-NO /Users/kgale/Desktop/cub/texture_examples/1.xpm
-SO /Users/kgale/Desktop/cub/texture_examples/2.xpm
+NO ./texture_examples/1.xpm
+SO ./texture_examples/2.xpm
 
 
-EA /Users/kgale/Desktop/cub/texture_examples/4.xpm
+EA ./texture_examples/4.xpm
 
-S             /Users/kgale/Desktop/cub/texture_examples/cat.xpm
+S             ./texture_examples/cat.xpm
 
 
 
 
 F 255,255,255
-WE /Users/kgale/Desktop/cub/texture_examples/4.xpm
+WE ./texture_examples/4.xpm
 C 101,67,33
 
      1111111111111

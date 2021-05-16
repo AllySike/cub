@@ -1,9 +1,9 @@
 R 1000 1000
-NO /Users/kgale/CLionProjects/cub/texture_examples/gene.xpm
-SO /Users/kgale/CLionProjects/cub/texture_examples/peter.xpm
-WE /Users/kgale/CLionProjects/cub/texture_examples/ace.xpm
-EA /Users/kgale/CLionProjects/cub/texture_examples/paul.xpm
-S /Users/kgale/CLionProjects/cub/texture_examples/sprite1.xpm
+NO ./texture_examples/gene.xpm
+SO ./texture_examples/peter.xpm
+WE ./texture_examples/ace.xpm
+EA ./texture_examples/paul.xpm
+S ./texture_examples/sprite1.xpm
 F 209,209,209
 C 23,236,255
 

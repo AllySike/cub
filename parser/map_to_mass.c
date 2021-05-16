@@ -35,16 +35,16 @@ static int	ft_mapsize(t_map *lst)
 static void	set_player(int x, int y, char c, t_scene *scene)
 {
 	if (c == 'N')
-		scene->pl.angl = 0;
-	else if (c == 'S')
-		scene->pl.angl = 180;
-	else if (c != 'W')
 		scene->pl.angl = 270;
-	else if (c != 'E')
+	else if (c == 'S')
 		scene->pl.angl = 90;
+	else if (c != 'W')
+		scene->pl.angl = 0;
+	else if (c != 'E')
+		scene->pl.angl = 180;
 	scene->mass[y][x] = '0';
-	scene->pl.x = x * SIZE_CHUNK;
-	scene->pl.y = y * SIZE_CHUNK;
+	scene->pl.x = x * SIZE_CHUNK + SIZE_CHUNK / 2;
+	scene->pl.y = y * SIZE_CHUNK + SIZE_CHUNK / 2;
 }
 
 void	mass_from_map(t_scene *scene, t_map *map, int ii)

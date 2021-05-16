@@ -54,17 +54,19 @@ void	free_split(char **split)
 	while (split[i])
 	{
 		free(split[i]);
+		split[i] = NULL;
 		i++;
 	}
-	free(split);
 }
 
 void	ft_exit(int fd, char **split, char *line)
 {
 	write(STDERR_FILENO, "Error\nWrong info format in the map\n", 35);
-	free_split(split);
+	if (split)
+		free_split(split);
 	if (fd > 0)
 		close(fd);
-	free(line);
+	if (line && *line)
+		free(line);
 	exit(-1);
 }
